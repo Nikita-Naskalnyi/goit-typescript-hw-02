@@ -1,4 +1,11 @@
 import Modal from "react-modal";
+import { Photo } from "../../types";
+
+interface ModalImageProps {
+  picture: Photo | null;
+  modalIsOpen: boolean;
+  closeModal: () => void;
+}
 
 Modal.setAppElement("#root");
 
@@ -16,7 +23,11 @@ const customStyles = {
   },
 };
 
-const ModalImage = ({ picture, modalIsOpen, closeModal }) => {
+const ModalImage: React.FC<ModalImageProps> = ({
+  picture,
+  modalIsOpen,
+  closeModal,
+}) => {
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -24,7 +35,7 @@ const ModalImage = ({ picture, modalIsOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Picture modal"
     >
-      <img src={picture?.src} alt={picture?.alt} />
+      {picture && <img src={picture.src} alt={picture.alt} />}
     </Modal>
   );
 };
